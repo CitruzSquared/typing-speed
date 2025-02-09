@@ -19,11 +19,10 @@ var n_n_nextword = wordlist[Math.floor(Math.random() * wordlist.length)];
 nextwordbox.innerText = nextword;
 n_nextwordbox.innerText = n_nextword;
 n_n_nextwordbox.innerText = n_n_nextword;
-style = window.getComputedStyle(word);
-width = style.getPropertyValue('width');
+var style = window.getComputedStyle(word);
+var width = style.getPropertyValue('width');
+var originalwidthnumber = parseFloat(width.substring(0, width.length - 2));
 textarea.style.width = width;
-textarea.maxLength = word.innerText.length;
-
 
 if (textarea.addEventListener) {
 	textarea.addEventListener('input', function() {
@@ -31,7 +30,7 @@ if (textarea.addEventListener) {
 		startTime = new Date();
 		started = true;
 		}
-		if (textarea.value.charAt(textarea.value.length - 1) === ' ') {
+		if (textarea.value.charAt(textarea.value.length - 1) === ' ' || textarea.value.charAt(textarea.value.length - 1) === '\n' ) {
 			textarea.value = textarea.value.substring(0, textarea.value.length - 1);
 		}
 		var correct = true;
@@ -47,16 +46,22 @@ if (textarea.addEventListener) {
 		else {
 			textarea.style.color = "#ff6060";
 		}
-		
+		if (textarea.value.length >=  word.innerText.length) {
+			widthnumber = parseFloat(textarea.style.width.substring(0, textarea.style.width.length - 2));
+			widthnumber = originalwidthnumber * textarea.value.length/word.innerText.length;
+			textarea.style.width = widthnumber.toString() + 'px';
+		}
+		else {
+			textarea.style.width = width;
+		}
 	}, false);
 } else if (textarea.attachEvent) {
 	area.attachEvent('onpropertychange', function() {
 		if (!started) {
 		startTime = new Date();
 		started = true;
-		console.log(started);
 		}
-		if (textarea.value.charAt(textarea.value.length - 1) === ' ') {
+		if (textarea.value.charAt(textarea.value.length - 1) === ' ' || textarea.value.charAt(textarea.value.length - 1) === '\n' ) {
 			textarea.value = textarea.value.substring(0, textarea.value.length - 1);
 		}
 		var correct = true;
@@ -71,6 +76,14 @@ if (textarea.addEventListener) {
 		}
 		else {
 			textarea.style.color = "#ff6060";
+		}
+		if (textarea.value.length >=  word.innerText.length) {
+			widthnumber = parseFloat(textarea.style.width.substring(0, textarea.style.width.length - 2));
+			widthnumber = originalwidthnumber * textarea.value.length/word.innerText.length;
+			textarea.style.width = widthnumber.toString() + 'px';
+		}
+		else {
+			textarea.style.width = width;
 		}
 	});
 }
@@ -98,8 +111,8 @@ function checkCorrect() {
 		n_n_nextwordbox.innerText = n_n_nextword;
 		style = window.getComputedStyle(word);
 		width = style.getPropertyValue('width');
+		originalwidthnumber = parseFloat(width.substring(0, width.length - 2));
 		textarea.style.width = width;
 		textarea.value = "";
-		textarea.maxLength = word.innerText.length;
 	}
 }
