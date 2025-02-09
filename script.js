@@ -12,7 +12,7 @@ var time = 0;
 word.innerText = wordlist[Math.floor(Math.random() * wordlist.length)];
 var nextword = wordlist[Math.floor(Math.random() * wordlist.length)];
 
-nextwordbox.innerText = "next word: " + nextword;
+nextwordbox.innerText = nextword;
 style = window.getComputedStyle(word);
 width = style.getPropertyValue('width');
 textarea.style.width = width;
@@ -24,6 +24,9 @@ if (textarea.addEventListener) {
 		if (!started) {
 		startTime = new Date();
 		started = true;
+		}
+		if (textarea.value.charAt(textarea.value.length - 1) === ' ') {
+			textarea.value = textarea.value.substring(0, textarea.value.length - 1);
 		}
 		var correct = true;
 		for (let i = 0; i < textarea.value.length; i++) {
@@ -46,6 +49,9 @@ if (textarea.addEventListener) {
 		startTime = new Date();
 		started = true;
 		console.log(started);
+		}
+		if (textarea.value.charAt(textarea.value.length - 1) === ' ') {
+			textarea.value = textarea.value.substring(0, textarea.value.length - 1);
 		}
 		var correct = true;
 		for (let i = 0; i < textarea.value.length; i++) {
@@ -79,7 +85,7 @@ function checkCorrect() {
 		numcorrectwords += 1;
 		word.innerText = nextword;
 		nextword = wordlist[Math.floor(Math.random() * wordlist.length)];
-		nextwordbox.innerText = "next word: " + nextword;
+		nextwordbox.innerText = nextword;
 		style = window.getComputedStyle(word);
 		width = style.getPropertyValue('width');
 		textarea.style.width = width;
