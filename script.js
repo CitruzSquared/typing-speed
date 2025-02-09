@@ -2,6 +2,8 @@ var speed = document.getElementById("speed");
 var word = document.getElementById("word");
 var textarea = document.getElementById("textarea");
 var nextwordbox = document.getElementById("nextword");
+var n_nextwordbox = document.getElementById("n_nextword");
+var n_n_nextwordbox = document.getElementById("n_n_nextword");
 
 
 var numcorrect = 0;
@@ -11,8 +13,12 @@ var time = 0;
 
 word.innerText = wordlist[Math.floor(Math.random() * wordlist.length)];
 var nextword = wordlist[Math.floor(Math.random() * wordlist.length)];
+var n_nextword = wordlist[Math.floor(Math.random() * wordlist.length)];
+var n_n_nextword = wordlist[Math.floor(Math.random() * wordlist.length)];
 
 nextwordbox.innerText = nextword;
+n_nextwordbox.innerText = n_nextword;
+n_n_nextwordbox.innerText = n_n_nextword;
 style = window.getComputedStyle(word);
 width = style.getPropertyValue('width');
 textarea.style.width = width;
@@ -83,9 +89,13 @@ function checkCorrect() {
 	if(word.innerText === textarea.value) {
 		numcorrect += word.innerText.length;
 		numcorrectwords += 1;
-		word.innerText = nextword;
-		nextword = wordlist[Math.floor(Math.random() * wordlist.length)];
-		nextwordbox.innerText = nextword;
+
+		word.innerText = nextwordbox.innerText;
+		nextwordbox.innerText = n_nextwordbox.innerText;
+		n_nextwordbox.innerText = n_n_nextwordbox.innerText;
+		
+		var n_n_nextword = wordlist[Math.floor(Math.random() * wordlist.length)];
+		n_n_nextwordbox.innerText = n_n_nextword;
 		style = window.getComputedStyle(word);
 		width = style.getPropertyValue('width');
 		textarea.style.width = width;
