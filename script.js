@@ -26,6 +26,7 @@ textarea.style.width = width;
 
 if (textarea.addEventListener) {
 	textarea.addEventListener('input', function() {
+		textarea.value = textarea.valuetoLowerCase();
 		if (!started) {
 		startTime = new Date();
 		started = true;
@@ -57,6 +58,7 @@ if (textarea.addEventListener) {
 	}, false);
 } else if (textarea.attachEvent) {
 	area.attachEvent('onpropertychange', function() {
+		textarea.value = textarea.valuetoLowerCase();
 		if (!started) {
 		startTime = new Date();
 		started = true;
